@@ -1,0 +1,83 @@
+
+= First steps with programming Bluetooth Low Energy devices
+Maxime Lefrançois maxime.lefrancois@emse.fr v1.0, 2022-12-01
+:homepage: http://ci.mines-stetienne.fr/cps2/course/pcd/
+:toc: left
+
+In this lab you will develop your first BLE applications.
+
+== Introduction to the Adafruit Feather Bluefruit Sense
+
+For MicroPython, use the link:https://github.com/micropython/micropython-lib/tree/master/micropython/bluetooth[`aioble` library].
+
+For CircuitPython, look at the link:https://learn.adafruit.com/adafruit-feather-sense/getting-started-with-ble-and-circuitpython[examples in the documentation]
+
+The slides of link:https://ci.mines-stetienne.fr/cps2/course/pcd/#_part_7_low_power_wireless_personal_area_networks_lowpan[_Lecture 7 LoWPAN_] may be useful, together with the following Bluetooth specification documents:
+
+* link:docs/Mesh%20Model%201.0.1.pdf[Bluetooth Mesh Model 1.0.1 Specification]: defines models (along with their required states and messages) that are used to perform basic functionality on the nodes in a mesh network beyond the foundation models defined in the Bluetooth Mesh Profile specification [2]. This specification includes generic models defining functionality that is standard across device types, and models, such as lighting control, sensors, and time and scenes, to support key mesh scenarios.
+* link:docs/Mesh%20Profile%201.0.1.pdf[Bluetooth Mesh Profile 1.0.1 Specification]: defines fundamental requirements to enable an interoperable mesh networking solution for Bluetooth low energy wireless technology.
+* link:docs/Mesh%20Device%20Properties%202.pdf[Bluetooth Mesh Device Properties 2 Specification]: contains definitions of device properties that are required by the Bluetooth Mesh Profile and Bluetooth Mesh Model specifications.
+* link:docs/Assigned-Numbers-2022-11-28.pdf[Bluetooth Assigned Numbers]: a regularly updated document listing assigned numbers, codes, and identifiers in the Bluetooth specifications.
+
+
+Browse these specifications and the link:https://github.com/micropython/micropython-lib/blob/master/micropython/bluetooth/aioble/examples/temp_sensor.py[aioble `temp_sensor.py` example]. Answer the following questions.
+
+1. **In what document(s) can you find the specification of the `org.bluetooth.service.environmental_sensing` service?** 
+2. **What is the format of the `org.bluetooth.characteristic.temperature` characteristic according to the specification?**
+3. **How are the appearance UUIDs used by BLE clients such as your phone?**
+4. **Find appropriate BLE services and characteristics for the sensors you have, given your project**
+
+_(edit this file and write your answers here)_
+
+Install the **nRF Connect** application on your smartphone, and make so that your device behaves as a valid BLE peripheral.
+
+Develop a BLE client to access the BLE peripheral.
+
+[source,python]
+----
+from adafruit_ble import BLERadio
+from adafruit_ble.advertising.standard import ProvideServicesAdvertisement
+from adafruit_ble.services.nordic import UARTService
+
+from adafruit_bluefruit_connect.packet import Packet
+from adafruit_bluefruit_connect.button_packet import ButtonPacket
+from adafruit_bluefruit_connect.accelerometer_packet import AccelerometerPacket
+from adafruit_bluefruit_connect.magnetometer_packet import MagnetometerPacket
+from adafruit_bluefruit_connect.gyro_packet import GyroPacket
+from adafruit_bluefruit_connect.quaternion_packet import QuaternionPacket
+
+ble = BLERadio()
+uart = UARTService()
+advertisement = ProvideServicesAdvertisement(uart)
+
+while True:
+    ble.start_advertising(advertisement)
+    while not ble.connected:
+        pass
+    
+    while ble.connected:
+        if uart.in_waiting:
+            packet = Packet.from_stream(uart)
+            if isinstance(packet, ButtonPacket):
+                if packet.pressed:
+                    if packet.button == ButtonPacket.BUTTON_1:
+                        print("1 button pressed!")
+                    elif packet.button == ButtonPacket.UP:
+                        print("UP button pressed!")
+            if isinstance(packet, AccelerometerPacket):
+                print("Acceleration:", packet.x, packet.y, packet.z)
+            if isinstance(packet, MagnetometerPacket):
+                print("Magnetometer:", packet.x, packet.y, packet.z)
+            if isinstance(packet, GyroPacket):
+                print("Gyro:", packet.x, packet.y, packet.z)
+            if isinstance(packet, QuaternionPacket):
+                print("Quaternion:", packet.x, packet.y, packet.z)
+----
+ the code evaluated with the help of bluefruit connect mobile application
+cite, use the link:https://learn.adafruit.com/circuitpython-nrf52840/bluefruit-le-connect-basics[`code reference link` adafruit].
+
+
+== Next steps
+
+Next your will just finalise your integrated project. Move to `project.adoc`
+

@@ -1,0 +1,89 @@
+= Testing the simple electronic components
+Maxime Lefrançois maxime.lefrancois@emse.fr v1.0, 2022-11-15
+:homepage: http://ci.mines-stetienne.fr/cps2/course/pcd/
+:toc: left
+
+
+This lab links to datasheets and user guides for some of the hardware in your lab briefcase. These datasheets and guides can be found in the `docs` folder.
+
+== Breadboard
+
+Most of the hardware contained in your briefcase can be plugged on a prototyping board. Ours is manufactured by BPS and is of type link:docs/Breadboard-BB830.pdf[BB830].
+
+IMPORTANT: link:https://learn.adafruit.com/breadboards-for-beginners/breadboards[Learn how to use the breadboard]
+
+image::images/BB830.png[]
+
+== MB102 Breadboard 3.3V/5V Power Supply
+
+You can supply 3.3V and/or 5V power to the breadboard using the MB102 power supply.
+
+IMPORTANT: link:docs/MB102-Datasheet.pdf[check out the datasheet]
+
+Check that the LED on the MB102 turns on if you power it, and that both jumpers are set in the 3.3 V position.
+
+image::images/MB102.png[]
+
+== Resistors
+
+Every briefcase should contain a high value (ex: 470 kΩ) , a medium value (10 kΩ) and a small value (ex: 100 Ω or 220 Ω) resistor. Check the chart below to know the values of your resistors. 
+
+NOTE: If you don't have a resistor for one of the cateories (high, medium, low), then ask the professor.
+
+image::images/chart_resistor.png[]
+
+**What resistor values do you have ?**
+
+_470K ohms with 5% tolerance and 220 ohms with 5% tolerance
+
+== LED
+
+Every briefcase should contain a LED. The color may differ. Check that you can turn it on. Use a small resistor to limit the current, which will keep the LED from burning out.
+
+image::images/LED.png[]
+
+**Assuming that you power the circuit at 3.3 V and the led has a 2 V nominal forward voltage drop, and you use a resistor of 220 Ω:**
+
+1. **calculate the voltage across the resistor**
+ 1.3V
+2. **calculate the current flowing through the circuit using the formula U = R x I**
+I = 1.3/220 = 0.006 amp
+
+The LED is in orange colour. We used resistor with 220 ohms and voltages 3.3v.
+
+
+== Buttons
+
+The briefcase should contain two Omron tactile buttons from link:docs/omron-b3f.pdf[the B3F series]
+
+Check that both buttons work with the setting below.
+
+image::images/button.png[]
+
+**Check the datasheet and answer the questions below:**
+
+1. **What model is the grey button? the pink button?**
+
+Gray button - B3F-1022 and Pink button -  B3F-1025
+
+2. **What operating force do they have?**
+
+Gray button - 1.47N {150gf} and Pink button -  2.55N{260gf}
+
+
+== Potentiometer
+
+The briefcase should contain a blue link:docs/adafruit-356.pdf[Adafruit 356 10 kΩ potentiometer] with three pins: P1, P2, P3.
+The resistor value between P1 and P3 is always 10 kΩ. The resistor value between P1 and P2 varies when you turn the knob. the resistor between P1 and P2 plus the resitor between P2 and P3 equals 10 kΩ.
+
+Check that the potentiometer works with the setting below, which should allow you to dim the LED.
+
+The knob at p2 pin is making the bulb is dim. If you keep that at p1 the bulb is brighting.
+
+image::images/potentiometer.png[]
+
+
+
+== Next steps
+
+Next we will flash and program the ESP32. Move on to `lab_esp32_micropython.adoc`

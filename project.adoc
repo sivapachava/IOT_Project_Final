@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+= Final project
+Maxime Lefrançois maxime.lefrancois@emse.fr v1.0, 2022-12-07
+:homepage: http://ci.mines-stetienne.fr/cps2/course/pcd/
+:toc: left
+
+You are totally free to define the main purpose of your final project, that you will demonstrate Jan 5th morning. 
+
+There are some boxes that need to be ticked, though.
+
+* You must use at least 75% of the functionalities you learned in the labs.
+* The three devices, or at lease two, must communicate (BLE appreciated, WiFi as a fallback, possibly with UART1...)
+* You shall use `uasyncio` when appropriate
+* Your code must be in a separate folder in your github repository, with a `README.md` file that explains exactly the functionalities, how to reproduce your demo, etc.
+
+NOTE: another group should be able to set the circuit and run your demo with their briefcase.
+=======
+= Final project
+Maxime Lefrançois maxime.lefrancois@emse.fr v1.0, 2022-12-07
+:homepage: http://ci.mines-stetienne.fr/cps2/course/pcd/
+:toc: left
+
+You are totally free to define the main purpose of your final project, that you will demonstrate Jan 5th morning. 
+
+There are some boxes that need to be ticked, though.
+
+* You must use at least 75% of the functionalities you learned in the labs.
+* The three devices, or at lease two, must communicate (BLE appreciated, WiFi as a fallback, possibly with UART1...)
+* You shall use `uasyncio` when appropriate
+* Your code must be in a separate folder in your github repository, with a `README.md` file that explains exactly the functionalities, how to reproduce your demo, etc.
+
+NOTE: another group should be able to set the circuit and run your demo with their briefcase.
+>>>>>>> 4450fe2ff94eced86b827f759de5236480bc0726
